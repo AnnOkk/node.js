@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "run_titanik": "node ./titanik_action/titanik.js",
-    "run_titanik2": "node ./titanik_action/titanik2.js"
+    "run_titanik2": "node ./titanik_action/titanik2.js",
+    "run_Edwards_Titanik": "node ./index.js"
   },
   "keywords": [],
   "author": "anna",
