@@ -85,7 +85,7 @@ reader.on('line', (line) => {
 
 })
 
-reader.on('close', (line) => {
+reader.on('close', () => {
     console.log('====buffer====')
     console.log(`Total fares = ${Number(fares.toFixed(2))}`);
     console.log(`Total avgFirst = ${Number(sumFirst / First).toFixed(2)}`);
