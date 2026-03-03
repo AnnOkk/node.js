@@ -1,5 +1,6 @@
 import fs from "node:fs";
 
+
 fs.readFile('./train.csv', 'utf8', (err, data) => {
     if (err) console.log(err);
     else {
