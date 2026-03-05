@@ -1,0 +1,19 @@
+{
+  "name": "dz-server",
+  "version": "1.0.0",
+  "description": "node.js http server homework",
+  "main": "index.js",
+  "scripts": {
+"start": "cross-env PORT=8000 node http-dz.js",
+    "dev": "node http-dz.js"
+
+  },
+  "keywords": [],
+  "author": "anna",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "cross-env": "^10.1.0",
+    "dotenv": "^17.3.1"
+  }
+}
