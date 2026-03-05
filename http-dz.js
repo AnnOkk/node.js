@@ -4,12 +4,12 @@ import * as url from "node:url"; //!
 
 dotenv.config() // возьми файл дотэнв и используй переменную оттуда(значение)
 
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 
 const server = http.createServer((req, res) => {
 
-    // let url = new URL(req.url,'http://localhost');
-    let url = req.url;
+     let url = new URL(req.url,'http://localhost');
+
     const name = url.searchParams.get('name');
     res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
     if (req.url) {
