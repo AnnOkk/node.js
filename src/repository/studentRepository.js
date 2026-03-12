@@ -44,12 +44,14 @@ export const addScore = (id, exam, score) => {
 }
 
 export const findByName = (name) => {
+const result = []
+    const normName = name.toLowerCase();
     for (const student of students.values()) {
-        if (student.name.trim().toLowerCase() === name.trim().toLowerCase()) {
-            return student;
+        if (student.name.trim().toLowerCase() === normName) {
+            result.push(student);
         }
     }
-    return null;
+    return result;
 }
 
 export const countByNames = (names) => {

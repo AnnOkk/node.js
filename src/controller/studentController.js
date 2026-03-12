@@ -54,9 +54,9 @@ export const findByName = (req, res) => {
 
     const student = repo.findByName(req.params.name);
 
-    if (student) {
-        const {password, ...studentWithoutPassword} = student;
-        res.json(studentWithoutPassword);
+    if (student.length>0) {
+        const studentsWithoutPasswords = student.map(({password, ...rest}) => rest)
+        res.json(studentsWithoutPasswords);
     } else {
         res.status(404).send();
     }
