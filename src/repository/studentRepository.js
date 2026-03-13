@@ -32,17 +32,23 @@ export const updateStudent = (id, data) => {
 }
 
 export const addScore = (id, exam, score) => {
-    // TODO: Implement score addition logic
+    const student = students.get(id);
+    if (student) {
+        student.scores[exam] = score;
+        return true;
+    }
+    return false;
 }
 
 export const findByName = (name) => {
-    // TODO: Implement student retrieval by name logic
+    return Array.from(students.values()).filter(s => s.name.toLowerCase() === name.toLowerCase());
 }
 
 export const countByNames = (names) => {
-    // TODO: Implement student count by names logic
+    names = names.map(name => name.toLowerCase());
+    return Array.from(students.values()).filter(s => names.includes(s.name.toLowerCase())).length;
 }
 
 export const findByMinScore = (exam, minScore) => {
-    // TODO: Implement student retrieval by minimum score logic
+    return Array.from(students.values()).filter(s => s.scores[exam] >= minScore);
 }
