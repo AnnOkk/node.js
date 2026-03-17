@@ -48,16 +48,16 @@ export const addScore = async (req, res) => {
     }
 }
 
-export const findByName = (req, res) => {
-    const students = repo.findByName(req.params.name);
+export const findByName = async (req, res) => {
+    const students = await repo.findByName(req.params.name);
     const studentsWithoutPasswords = students.map(student => ({...student, password: undefined}))
     res.json(studentsWithoutPasswords);
 }
 
-export const countByNames = (req, res) => {
+export const countByNames = async (req, res) => {
     const names = req.query.names;
     const list = Array.isArray(names) ? names : [names];
-    const count = repo.countByNames(list);
+    const count = await repo.countByNames(list);
     res.json(count)
 }
 
