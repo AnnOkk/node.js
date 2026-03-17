@@ -1,13 +1,20 @@
 import * as repo from '../repository/studentRepository.js';
 
 export const addStudent = async ({id, name, password}) => {
-    // TODO
+    if (await repo.findStudentById(id)) {
+        return false;
+    }
+    await repo.createStudent({_id: id, name, password});
+    return true;
 }
 
 export const findStudent = async (id) => {
-    // TODO
+    const student = await repo.findStudentById(id);
+    if (student) {
+        student.password = undefined;
+    }
+    return student;
 }
-
 
 export const deleteStudent = async (id) => {
     // TODO
@@ -31,12 +38,4 @@ export const countByNames = async (names) => {
 
 export const findByMinScore = async (exam, minScore) => {
     // TODO
-}
-
-function renameId(student) {
-    if (student) {
-        student.id = student._id;
-        delete student._id;
-    }
-    return student;
 }
