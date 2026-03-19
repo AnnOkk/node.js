@@ -1,12 +1,11 @@
-import StudentModel from '../model/student';
-import Student from "../model/student";
+import Student from '../model/student.js';
 
 
 export function createStudent(student) {
     return Student.create(student);
 }
 
-export function findStudentById(id){
+export function findStudentById(id) {
     return Student.findById(id);
 }
 
@@ -14,28 +13,30 @@ export function deleteStudentById(id) {
     return Student.findByIdAndDelete(id);
 }
 
-export function updateStudent(id,data) {
-    return Student.findByIdAndUpdate(id,data)
+export function updateStudent(id, data) {
+    return Student.findByIdAndUpdate(id, data, {returnDocument:'after'})
 }
 
-export function updateStudentScore(id,exam,score) {
-    return Student.findByIdAndUpdate(id,{$set:{[`scores.$[exam]`]:score}});
+export function updateStudentScore(id, exam, score) {
+    return Student.findByIdAndUpdate(id,
+        {$set: {[`scores.${exam}`]: score}},
+        {new: true});
 }
 
 export function findStudentsByName(name) {
-    return Student.find({name: new RegExp(`^${name}$`,'i')});
+    return Student.find({name: new RegExp(`^${name}$`, 'i')});
 }
 
-export function countStudentsByName(name) {
-    const regexConditions = names.map(name=> ({
-        name: new RegExp(`^${name}$`,'i')
+export function countStudentsByName(names) {
+    const regexConditions = names.map(name => ({
+        name: new RegExp(`^${name}$`, 'i')
     }))
-    return Student.countDocuments({$or:regexConditions});
-}
-export function findStudentsByMinScore(exam, minScore) {
-    return Student.find({[`scores.${exam}`]:{$gte:minScore}})
+    return Student.countDocuments({$or: regexConditions});
 }
 
+export function findStudentsByMinScore(exam, minScore) {
+    return Student.find({[`scores.${exam}`]: {$gte: minScore}})
+}
 
 
 // export const addStudent = async ({id, name, password}) => {

@@ -7,6 +7,7 @@ const {error}=addStudentScheme.validate(req.body)
     if (error) {
         res.status(400).send(error.details[0].message);
     }
+
     const success = await service.addStudent(req.body)
     if (success) {
         res.status(204).send();
@@ -36,27 +37,28 @@ export const deleteStudent = async (req, res) => {
 
 export const updateStudent = async (req, res) => {
 
-    const {error} = await updateStudentScheme(+req.params.id, req.body);
+    const {error} = await updateStudentScheme.validate(req.body);
     if (error) {
-        res.status(400).send(error.details[0].message);
+        return res.status(400).send(error.details[0].message);
     }
     const student = await service.updateStudent(+req.params.id, req.body);
     if (student) {
-        res.json();
+        res.json(student);
     } else {
         res.status(404).send();
     }
 }
 
 export const addScore = async (req, res) => {
-    const {error} = await scoreSchema.validate(+req.params.id, req.body);
+    const {error} = await scoreSchema.validate( req.body);
 
     const success = await service.addScore(+req.params.id, req.body.examName, +req.body.score);
     if (success) {
-        res.status(204).send();
+        res.json(success);
     } else {
         res.status(404).send();
     }
+
 }
 
 export const findByName = async (req, res) => {
