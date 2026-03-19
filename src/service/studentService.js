@@ -49,7 +49,7 @@ return renameId(student);
 }
 
 export const findByName = async (name) => {
-    const student = await repo.findStudentsByName()
+    const student = await repo.findStudentsByName(name)
     if (student) {
         return student
     } else return false;

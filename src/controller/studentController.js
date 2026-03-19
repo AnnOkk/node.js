@@ -50,11 +50,13 @@ export const updateStudent = async (req, res) => {
 }
 
 export const addScore = async (req, res) => {
-    const {error} = await scoreSchema.validate( req.body);
-
+    const {error} =  scoreSchema.validate( req.body);
+    if (error) {
+        return res.status(400).send(error.details[0].message);
+    }
     const success = await service.addScore(+req.params.id, req.body.examName, +req.body.score);
     if (success) {
-        res.json(success);
+        res.status(204).send();
     } else {
         res.status(404).send();
     }
